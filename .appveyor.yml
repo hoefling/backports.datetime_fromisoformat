@@ -1,0 +1,26 @@
+# source: https://packaging.python.org/appveyor
+cache:
+  - '%LOCALAPPDATA%\pip\Cache'
+
+environment:
+  matrix:
+    - TOXENV: "py34"
+      TOX_APPVEYOR_X64: 1
+    - TOXENV: "py34"
+      TOX_APPVEYOR_X64: 0
+    - TOXENV: "py35"
+      TOX_APPVEYOR_X64: 1
+    - TOXENV: "py35"
+      TOX_APPVEYOR_X64: 0
+    - TOXENV: "py36"
+      TOX_APPVEYOR_X64: 1
+    - TOXENV: "py36"
+      TOX_APPVEYOR_X64: 0
+
+install:
+  - ps: py -3.6 -m pip install tox tox-appveyor --upgrade --no-warn-script-location --disable-pip-version-check
+
+build: off
+
+test_script:
+  - ps: py -3.6 -m tox -vv
